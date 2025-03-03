@@ -7,6 +7,7 @@ http
     if (req.url === '/') {
       fs.readFile('index.html', function (err, data) {
         res.write(data);
+        console.log(USER);
         return res.end();
       });
     } else if (req.url === '/about') {
