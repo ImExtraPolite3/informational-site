@@ -1,40 +1,14 @@
 const express = require('express');
 const app = express();
-const fs = require('fs');
+const authorRouter = require('./routes/authorRouter');
+const bookRouter = require('./routes/bookRouter');
+const indexRouter = require('./routes/indexRouter');
 
-app.get('/', (req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/html' });
-  fs.readFile('index.html', (err, data) => {
-    res.write(data);
-    return res.end();
-  });
-});
-
-app.get('/about', (req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/html' });
-  fs.readFile('about.html', (err, data) => {
-    res.write(data);
-    return res.end();
-  });
-});
-
-app.get('/contact', (req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/html' });
-  fs.readFile('contact-me.html', (err, data) => {
-    res.write(data);
-    return res.end();
-  });
-});
-
-app.get('*', (req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/html' });
-  fs.readFile('404.html', (err, data) => {
-    res.write(data);
-    return res.end();
-  });
-});
+app.use('/author', authorRouter);
+app.use('/books', bookRouter);
+app.use('/', indexRouter);
 
 const PORT = 3000;
 app.listen(PORT, () => {
-  console.log('someshit');
+  console.log('running');
 });
